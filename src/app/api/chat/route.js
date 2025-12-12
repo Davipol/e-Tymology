@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPENROUTER_API_KEY,
+  apiKey: process.env.CHIMERA_API_KEY,
 });
 
 export async function POST(request) {
@@ -12,20 +12,30 @@ export async function POST(request) {
     const { message } = await request.json();
     console.log("Received message:", message);
     const response = await openai.chat.completions.create({
-      model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+      model: "tngtech/deepseek-r1t-chimera:free",
       messages: [
         {
           role: "system",
-          content: `You are an API. You must reply ONLY with valid JSON, no markdown, no text outside JSON, no triple backticks.
-Etymology of "${message}" in this format:{
-  "modernMeaning": "...",
-  "centuryOfOrigin": "...",
-  "detailedEtymology": "...",
-  "funFact": "..."
-}`,
+          content: `You are a JSON API that provides etymology information. Respond ONLY with valid JSON.
+
+Return etymology data in this exact structure:
+{
+  "modernMeaning": "current definition of the word",
+  "centuryOfOrigin": "century when word originated (e.g., '9th century')",
+  "detailedEtymology": "detailed history and origin of the word",
+  "funFact": "interesting fact about the word"
+}
+
+CRITICAL: Return ONLY the JSON object. No explanations, no markdown, no code blocks, no other text.`,
         },
-        { role: "user", content: message },
+        {
+          role: "user",
+          content: `Provide etymology for: ${message}
+
+Note: If this appears to be a misspelling (like "telephon" for "telephone" or "algorythm" for "algorithm"), automatically correct it and provide etymology for the correct spelling. Mention the correction in the modernMeaning field like: "(Corrected from '${message}') [definition]"`,
+        },
       ],
+      temperature: 0.2,
     });
 
     let rawContent = response.choices?.[0]?.message?.content || "{}";

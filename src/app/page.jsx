@@ -134,6 +134,7 @@ export default function Home() {
       setHistory(updatedHistory);
       localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
     } catch (error) {
+      console.log(error);
       setError("Error fetching answer. Please try again.");
       setAnswer(null);
     } finally {
