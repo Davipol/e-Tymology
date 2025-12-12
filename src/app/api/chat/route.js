@@ -4,7 +4,7 @@ const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.CHIMERA_API_KEY,
 });
-
+// Add spell-check function
 async function checkSpelling(word) {
   try {
     const response = await fetch(
