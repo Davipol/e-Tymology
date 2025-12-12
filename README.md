@@ -7,7 +7,8 @@ e-Tymology is an interactive web application that lets you explore the **origin 
 ## 🚀 Features
 
 - 🔍 **Word Lookup** – Enter any word or phrase to discover its story.  
-- 🎲 **Surprise Me Button** – Get a random word when you’re feeling curious.  
+- 🎲 **Surprise Me Button** – Get a random word when you’re feeling curious.
+- ✨ **Auto Spell-Check** – Automatically corrects misspelled words using the Datamuse API.  
 - 📝 **History Bar** – Keeps track of previously searched words.  
   - Select a past word to view its explanation again.  
   - Clear history or remove individual entries.  
@@ -23,7 +24,9 @@ e-Tymology is an interactive web application that lets you explore the **origin 
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)  
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/)  
 - **Storage**: LocalStorage for saving history  
-- **Backend**: Next.js API Route (`/api/chat`) – connects to your language/etymology service  
+- **Backend**: Next.js API Route (`/api/chat`) – connects to OpenRouter for AI-powered etymology
+- **AI Model**: DeepSeek R1T Chimera (via OpenRouter)
+- **Spell-Check**: Datamuse API
 
 ---
 
@@ -52,21 +55,32 @@ e-Tymology/
 ## ⚙️ Installation & Setup
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/e-Tymology.git
-   cd e-Tymology
-2. **Run the development server**
-   ```bash
-   npm run dev
-3. **Open your browser**
-   ```bash
-   http://localhost:3000
-
-## 🌱 Environment Variables
-
-Create a `.env.local` file in the root directory and add your API keys or environment-specific variables. Example:
 ```bash
-OPENROUTER_API_KEY=your_api_key_here
+   git clone https://github.com/Davipol/e-Tymology.git
+   cd e-Tymology
+```
+
+2. **Install dependencies**
+```bash
+   npm install
+```
+
+3. **Set up environment variables**
+   
+   Create a `.env.local` file in the root directory:
+```bash
+   CHIMERA_API_KEY=your_openrouter_api_key_here
+```
+   Get your API key from [OpenRouter](https://openrouter.ai/)
+
+4. **Run the development server**
+```bash
+   npm run dev
+```
+
+5. **Open your browser**
+```bash
+   http://localhost:3000
 ```
 ---
 
