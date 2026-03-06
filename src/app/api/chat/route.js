@@ -8,7 +8,7 @@ const openai = new OpenAI({
 async function checkSpelling(word) {
   try {
     const response = await fetch(
-      `https://api.datamuse.com/words?sp=${encodeURIComponent(word)}&max=1`
+      `https://api.datamuse.com/words?sp=${encodeURIComponent(word)}&max=1`,
     );
     const data = await response.json();
 
@@ -35,11 +35,11 @@ export async function POST(request) {
 
     const { corrected, wasCorrected } = await checkSpelling(message);
     console.log(
-      `Original: "${message}", Corrected: "${corrected}", Changed: ${wasCorrected}`
+      `Original: "${message}", Corrected: "${corrected}", Changed: ${wasCorrected}`,
     );
 
     const response = await openai.chat.completions.create({
-      model: "tngtech/deepseek-r1t-chimera:free",
+      model: "liquid/lfm-2.5-1.2b-instruct:free",
       messages: [
         {
           role: "system",
@@ -125,7 +125,7 @@ CRITICAL: Return ONLY the JSON object. No explanations, no markdown, no code blo
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   }
 }
