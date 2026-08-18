@@ -5,7 +5,7 @@ function getOpenAI() {
   if (!openai) {
     openai = new OpenAI({
       baseURL: "https://openrouter.ai/api/v1",
-      apiKey: process.env.LIQUID_API_KEY,
+      apiKey: process.env.GEMMA_API_KEY,
     });
   }
   return openai;

@@ -75,7 +75,7 @@ e-Tymology/
    Create a `.env.local` file in the root directory:
 
 ```bash
-   LIQUID_API_KEY=your_openrouter_api_key_here
+   GEMMA_API_KEY=your_openrouter_api_key_here
 ```
 
 Get your API key from [OpenRouter](https://openrouter.ai/)
@@ -107,7 +107,7 @@ You can also build and run the app in a container instead of installing Node loc
 2. **Run the container**
 
 ```bash
-   docker run -p 3000:3000 -e LIQUID_API_KEY="your_openrouter_api_key_here" e-tymology
+   docker run -p 3000:3000 -e GEMMA_API_KEY="your_openrouter_api_key_here" e-tymology
 ```
 
 3. **Open your browser**
