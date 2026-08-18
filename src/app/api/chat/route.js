@@ -1,9 +1,16 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.LIQUID_API_KEY,
-});
+let openai;
+function getOpenAI() {
+  if (!openai) {
+    openai = new OpenAI({
+      baseURL: "https://openrouter.ai/api/v1",
+      apiKey: process.env.LIQUID_API_KEY,
+    });
+  }
+  return openai;
+}
+
 // Add spell-check function
 async function checkSpelling(word) {
   try {
@@ -38,7 +45,7 @@ export async function POST(request) {
       `Original: "${message}", Corrected: "${corrected}", Changed: ${wasCorrected}`,
     );
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: "google/gemma-4-26b-a4b-it:free",
       messages: [
         {

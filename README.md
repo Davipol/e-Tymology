@@ -25,7 +25,7 @@ e-Tymology is an interactive web application that lets you explore the **origin 
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
 - **Storage**: LocalStorage for saving history
 - **Backend**: Next.js API Route (`/api/chat`) – connects to OpenRouter for AI-powered etymology
-- **AI Model**: Liquid LFM 2.5 (via OpenRouter)
+- **AI Model**: Google Gemma 4 26B (via OpenRouter)
 - **Spell-Check**: Datamuse API
 - **Random Words**: Random Word API
 
@@ -36,19 +36,20 @@ e-Tymology is an interactive web application that lets you explore the **origin 
 ```
 e-Tymology/
 │
-├── app/
-│ ├── page.js # Main home page
-│ ├── api/
-│ │ └── chat/route.js # API endpoint for word lookup
-│ └── components/
-│ ├── Header.js # App header with title & dark mode toggle
-│ ├── HistoryBar.js # Sidebar with word history
-│
-├── utils/
-│ └── randomWord.js # Fetches a random word
+├── src/
+│ └── app/
+│   ├── page.jsx # Main home page
+│   ├── layout.js # Root layout
+│   ├── globals.css # Tailwind styles
+│   ├── api/
+│   │ └── chat/route.js # API endpoint for word lookup
+│   └── components/
+│     ├── Header.jsx # App header with title & dark mode toggle
+│     ├── HistoryBar.jsx # Sidebar with word history
+│     └── Footer.jsx # App footer
 │
 ├── public/ # Static assets
-├── styles/ # Tailwind styles
+├── Dockerfile # Container build definition
 └── README.md
 ```
 
@@ -74,7 +75,7 @@ e-Tymology/
    Create a `.env.local` file in the root directory:
 
 ```bash
-   CHIMERA_API_KEY=your_openrouter_api_key_here
+   LIQUID_API_KEY=your_openrouter_api_key_here
 ```
 
 Get your API key from [OpenRouter](https://openrouter.ai/)
@@ -86,6 +87,30 @@ Get your API key from [OpenRouter](https://openrouter.ai/)
 ```
 
 5. **Open your browser**
+
+```bash
+   http://localhost:3000
+```
+
+---
+
+## 🐳 Running with Docker
+
+You can also build and run the app in a container instead of installing Node locally.
+
+1. **Build the image**
+
+```bash
+   docker build -t e-tymology .
+```
+
+2. **Run the container**
+
+```bash
+   docker run -p 3000:3000 -e LIQUID_API_KEY="your_openrouter_api_key_here" e-tymology
+```
+
+3. **Open your browser**
 
 ```bash
    http://localhost:3000
